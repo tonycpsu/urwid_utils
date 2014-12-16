@@ -38,9 +38,6 @@ class PaletteEntry(list):
         rep.append(u')>')
         return u''.join(rep)
 
-    def __str__(self):
-        return self.name
-
     def _key(self):
         return tuple(self[:len(self.attrs)])
 
