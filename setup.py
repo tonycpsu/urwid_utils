@@ -29,6 +29,7 @@ setup(
     bugtrack_url='https://github.com/stnbu/{0}/issues'.format(NAME),
     classifiers=[
         'Development Status :: 3 - Alpha',
+        'Environment :: Console :: Curses',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
