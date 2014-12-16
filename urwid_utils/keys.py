@@ -20,7 +20,7 @@ for key in keys:
         key_const[attr_name] = KeySequence(key)
 
 key_const.update(get_const_identifiers(urwid.escape))
-key_const.pop('ESC')            # FIXME: is this necessary?
-key_const['ESCAPE'] = 'escape'  # FIXME: is this necessary?
+key_const.pop('ESC')         # FIXME: is this necessary?
+key_const['ESCAPE'] = 'esc'  # FIXME: is this necessary?
 globals().update(key_const)
 __all__ = key_const.keys()
