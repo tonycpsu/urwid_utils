@@ -24,6 +24,7 @@ setup(
     url='https://github.com/stnbu/{0}'.format(NAME),
     download_url='https://github.com/stnbu/{0}/archive/master.zip'.format(NAME),
     provides=[NAME],
+    requires=['urwid'],
     license='MIT',
     bugtrack_url='https://github.com/stnbu/{0}/issues'.format(NAME),
     classifiers=[
