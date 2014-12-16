@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from urwid_utils.colors import BASIC_COLORS
+from urwid_utils.colors import BASIC_COLORS, STYLES
 from urwid_utils.util import is_valid_identifier
 import urwid
 from collections import OrderedDict
@@ -48,7 +48,7 @@ class PaletteEntry(list):
         return hash(self._key())
 
     def allowed(self, value):
-        return value is None or value in BASIC_COLORS
+        return value is None or value in BASIC_COLORS + [v for n,v in STYLES]
 
     def __setattr__(self, name, value):
         if name != 'name' and not self.allowed(value):
@@ -78,12 +78,18 @@ class Palette(list):
         list.__init__(self, entries.values())
 
     def __setattr__(self, name, value):
-        if not is_valid_identifier(name):
-            raise AttributeError(u'"{0}" is not a legal python identifier.'.format(name))
-        for index, entry in enumerate(self):
-            if entry[0] == name:
-                self[index] = [name] + value
-        list.__setattr__(self, name, value)
+        if isinstance(value, list):
+            if not is_valid_identifier(name):
+                raise AttributeError(u'"{0}" is not a legal python identifier.'.format(name))
+            for index, entry in enumerate(self):
+                if entry[0] == name:
+                    self[index] = value
+                    break
+            else:
+                value.name = name  # Only here do we need to set the PaletteEntry()'s name
+                self.append(value)
+        else:
+            list.__setattr__(self, name, value)
 
     def __getattr__(self, name):
         for entry in self:
