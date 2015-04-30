@@ -2,6 +2,7 @@
 
 from urwid_utils.colors import BASIC_COLORS, STYLES
 from urwid_utils.util import is_valid_identifier
+from urwid.display_common import _parse_color_256
 import urwid
 from collections import OrderedDict
 
@@ -45,7 +46,11 @@ class PaletteEntry(list):
         return hash(self._key())
 
     def allowed(self, value):
-        return value is None or value in BASIC_COLORS + [v for n,v in STYLES]
+        return any([(val is None
+                or val in [v for n,v in STYLES]
+                or val in BASIC_COLORS
+                or _parse_color_256(val)) for val in value.split(',')])
+
 
     def __setattr__(self, name, value):
         if name != 'name' and not self.allowed(value):
