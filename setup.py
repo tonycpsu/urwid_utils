@@ -4,21 +4,24 @@ from setuptools import setup
 
 import urwid_utils
 
+# 2018-01-24 (tonyc) this breaks because it imports urwid, which the user may
+# or may not have installed yet.
+
 # README.rst dynamically generated:
-with open('README.rst', 'w') as f:
-    f.write(urwid_utils.__doc__)
+# with open('README.rst', 'w') as f:
+#     f.write(urwid_utils.__doc__)
 
-NAME = urwid_utils.__name__
+NAME = "urwid_utils" #urwid_utils.__name__
 
-def read(file):
-    with open(file, 'r') as f:
-        return f.read().strip()
+# def read(file):
+#     with open(file, 'r') as f:
+#         return f.read().strip()
 
 setup(
     name=NAME,
     version=read('VERSION'),
     description='A collection of simple, straightforward, but extensible utilities for the urwid package.',
-    long_description=read('README.rst'),
+    # long_description=read('README.rst'),
     author='Mike Burr',
     author_email='mburr@unintuitive.org',
     url='https://github.com/stnbu/{0}'.format(NAME),
