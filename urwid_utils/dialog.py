@@ -30,7 +30,7 @@ class DialogFrame(urwid.Frame):
         return self.__super.keypress(size, key)
 
 
-class DialogBase(urwid.WidgetWrap):
+class DialogBase(urwid.WidgetWrap, metaclass=urwid.signals.MetaSignals):
 
     palette = Palette()
     palette.dialog_body = PaletteEntry()
@@ -39,8 +39,6 @@ class DialogBase(urwid.WidgetWrap):
     palette.dialog_border = PaletteEntry()
     palette.button = PaletteEntry()
     palette.reveal_focus = PaletteEntry()
-
-    __metaclass__ = urwid.signals.MetaSignals
     signals = ['commit']
 
     parent = None
@@ -66,7 +64,7 @@ class DialogBase(urwid.WidgetWrap):
         if self.buttons is None:
             self.buttons = [("OK", True, self.on_affirmative), ("Cancel", False, self.on_negatory)]
             self.escape_keys = [keys.ESCAPE, 'q', 'Q']
-        elif isinstance(self.buttons, basestring):
+        elif isinstance(self.buttons, str):
             if self.buttons == BUTTONS_YES_NO:
                 self.buttons = [("Yes", True, self.on_affirmative), ("No", False, self.on_negatory)]
                 self.escape_keys = [keys.ESCAPE, 'q', 'Q']

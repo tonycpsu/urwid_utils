@@ -35,7 +35,7 @@ class ManualTest(object):
         d.show()
 
     def unhandled_input(self, k):
-        if not isinstance(k, basestring):
+        if not isinstance(k, str):
             return k
         if k.lower() == 'q':
             d = dialog.YesNoDialog(30, 10, data='Are you sure you want to quit?',

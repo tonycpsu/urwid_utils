@@ -13,11 +13,11 @@ MISC_CONST_VAL = [
     'fixed top',
 ]
 MISC_CONST_NAMES = [v.replace(' ', '_').upper() for v in MISC_CONST_VAL]
-MISC_CONST = zip(MISC_CONST_NAMES, MISC_CONST_VAL)
+MISC_CONST = list(zip(MISC_CONST_NAMES, MISC_CONST_VAL))
 MISC_CONST.append(('FOCUS_HEADER', 'header'))
 MISC_CONST.append(('FOCUS_BODY', 'body'))
 MISC_CONST.append(('FOCUS_FOOTER', 'footer'))
 
 const = get_const_identifiers(widget, command_map, MISC_CONST)
 globals().update(const)
-__all__ = const.keys()
+__all__ = list(const.keys())
