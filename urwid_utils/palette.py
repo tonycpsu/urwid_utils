@@ -1,10 +1,21 @@
 # -*- coding: utf-8 -*-
 
+import urwid
 from urwid_utils.colors import BASIC_COLORS, STYLES
 from urwid_utils.util import is_valid_identifier
 from urwid.display_common import _parse_color_256
-import urwid
-from collections import OrderedDict
+try:
+    from urwid.display_common import _parse_color_true
+    URWID_HAS_TRUE_COLOR=True
+except ImportError:
+    URWID_HAS_TRUE_COLOR=False
+
+
+COLORS_ALLOWED_MAP = {
+    16: lambda val: val in BASIC_COLORS,
+    256: lambda val: _parse_color_256(val) is not None,
+    1<<24: lambda val: URWID_HAS_TRUE_COLOR and _parse_color_true(val) is not None
+}
 
 class PaletteEntry(list):
 
@@ -45,12 +56,18 @@ class PaletteEntry(list):
     def __hash__(self):
         return hash(self._key())
 
-    def allowed(self, value):
-        return any([(val is None
-                or val in [v for n,v in STYLES]
-                or val in BASIC_COLORS
-                or _parse_color_256(val)) for val in value.split(',')])
+    def allowed(self, value, colors=None):
 
+        color_allowed = lambda val: any([
+                COLORS_ALLOWED_MAP[k](val)
+            for k in COLORS_ALLOWED_MAP.keys()
+            if not colors or k <= colors
+        ])
+        return any([(
+            val is None
+            or val in [v for n,v in STYLES]
+            or color_allowed(val)
+        ) for val in value.split(',')])
 
     def __setattr__(self, name, value):
         if name != 'name' and not self.allowed(value):
