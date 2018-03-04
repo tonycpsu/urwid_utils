@@ -3,9 +3,9 @@
 import re
 import urwid
 from urwid.display_common import _BASIC_COLORS as BASIC_COLORS
+from urwid.display_common import _ATTRIBUTES as STYLES
 from urwid_utils.util import get_const_identifiers
 
-STYLES = ['bold', 'underline', 'blink', 'standout']
 STYLES = list(zip([n.upper() for n in STYLES], STYLES))
 
 color_const = get_const_identifiers(urwid.display_common, STYLES)
