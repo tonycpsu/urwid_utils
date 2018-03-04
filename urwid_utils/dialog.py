@@ -30,7 +30,7 @@ class DialogFrame(urwid.Frame):
         return self.__super.keypress(size, key)
 
 
-class DialogBase(urwid.WidgetWrap, metaclass=urwid.signals.MetaSignals):
+class DialogBase(urwid.WidgetWrap):
 
     palette = Palette()
     palette.dialog_body = PaletteEntry()
@@ -154,8 +154,8 @@ class EditDialog(DialogBase):
         edit_text, editor_label = data
         self.edit = urwid.Edit(edit_text=edit_text)
         body = urwid.ListBox(urwid.SimpleListWalker([
-            urwid.AttrMap(urwid.Text(editor_label), focus_map=self.palette.reveal_focus.name),
-            urwid.AttrMap(self.edit, focus_map=self.palette.reveal_focus.name),
+            urwid.AttrMap(urwid.Text(editor_label), attr_map={}, focus_map=self.palette.reveal_focus.name),
+            urwid.AttrMap(self.edit, attr_map={}, focus_map=self.palette.reveal_focus.name),
         ]))
         return body
     def callback(self):
@@ -173,4 +173,3 @@ class NoticeDialog(DialogBase):
 
     def callback(self, *args, **kwargs):
         pass
-

@@ -6,6 +6,9 @@ import curses
 import urwid
 from urwid_utils import dialog
 
+class TestDialog(dialog.EditDialog):
+    pass
+
 class ManualTest(object):
 
     def __init__(self):
@@ -43,7 +46,7 @@ class ManualTest(object):
             urwid.connect_signal(d, 'commit', self.quit)
             d.show()
         if k.lower() == 'e':
-            d = dialog.EditDialog(50, 10, data=('<<existing text>>', 'please enter some text: '),
+            d = TestDialog(50, 10, data=('<<existing text>>', 'please enter some text: '),
                            header_text='The Header Text',
                            loop=self.loop)
             urwid.connect_signal(d, 'commit', self.edit_dialog_callback)
@@ -54,4 +57,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
