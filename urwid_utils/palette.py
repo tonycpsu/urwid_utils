@@ -9,12 +9,12 @@ from collections import OrderedDict
 class PaletteEntry(list):
 
     attrs = [
-        u'name',
-        u'foreground',
-        u'background',
-        u'mono',
-        u'foreground_high',
-        u'background_high',
+        'name',
+        'foreground',
+        'background',
+        'mono',
+        'foreground_high',
+        'background_high',
     ]
 
     def __init__(self, *args, **kwargs):
@@ -22,7 +22,7 @@ class PaletteEntry(list):
         for index, value in enumerate(args):
             key = self.attrs[index]
             kwargs[key] = value
-        for name, value in kwargs.iteritems():
+        for name, value in kwargs.items():
             self.__setattr__(name=name, value=value)
 
     def __repr__(self):
@@ -31,13 +31,13 @@ class PaletteEntry(list):
         attrs = []
         for index, attr_name in enumerate(self.attrs):
             value = self[index]
-            attrs.append(u'{0}={1}'.format(attr_name, repr(value)))
-        rep.append(u'<')
+            attrs.append('{0}={1}'.format(attr_name, repr(value)))
+        rep.append('<')
         rep.append(class_name)
-        rep.append(u'(')
-        rep.append(u', '.join(attrs))
-        rep.append(u')>')
-        return u''.join(rep)
+        rep.append('(')
+        rep.append(', '.join(attrs))
+        rep.append(')>')
+        return ''.join(rep)
 
     def _key(self):
         return tuple(self[:len(self.attrs)])
@@ -69,20 +69,20 @@ class PaletteEntry(list):
             return self[index]
         except ValueError:
             pass
-        raise AttributeError(u'"{0}": unknown attribute'.format(name))
+        raise AttributeError('"{0}": unknown attribute'.format(name))
 
 class Palette(list):
 
     def __init__(self, name=None, **entries):
         self.name = name
-        for name, entry in entries.iteritems():
+        for name, entry in entries.items():
             entry.name = name
-        list.__init__(self, entries.values())
+        list.__init__(self, list(entries.values()))
 
     def __setattr__(self, name, value):
         if isinstance(value, list):
             if not is_valid_identifier(name):
-                raise AttributeError(u'"{0}" is not a legal python identifier.'.format(name))
+                raise AttributeError('"{0}" is not a legal python identifier.'.format(name))
             for index, entry in enumerate(self):
                 if entry[0] == name:
                     self[index] = value
@@ -97,15 +97,15 @@ class Palette(list):
         for entry in self:
             if entry[0] == name:
                 return entry
-        raise AttributeError(u'"{0}": unknown attribute'.format(name))
+        raise AttributeError('"{0}": unknown attribute'.format(name))
 
     def __repr__(self):
         rep = []
         class_name = self.__class__.__name__
-        rep.append(u'<')
+        rep.append('<')
         rep.append(class_name)
-        rep.append(u'(\n')
-        rep.append(u'    name={0},\n'.format(repr(self.name)))
-        rep.extend([u'    {0},\n'.format(repr(e)) for e in self])
-        rep.append(u')>')
-        return u''.join(rep)
+        rep.append('(\n')
+        rep.append('    name={0},\n'.format(repr(self.name)))
+        rep.extend(['    {0},\n'.format(repr(e)) for e in self])
+        rep.append(')>')
+        return ''.join(rep)

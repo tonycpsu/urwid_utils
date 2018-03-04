@@ -17,7 +17,7 @@ class TestPalette(unittest.TestCase):
         colors = ['dark red', 'light blue', 'white', 'yellow', 'dark gray']
         attr_values = ['some_palette_entry'] + colors
 
-        kwargs = dict(zip(attr_names, attr_values))
+        kwargs = dict(list(zip(attr_names, attr_values)))
 
         some_palette_entry = PaletteEntry(**kwargs)
 

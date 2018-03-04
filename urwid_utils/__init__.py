@@ -22,7 +22,7 @@ urwid_utils.util
      Mostly internal-used utilities.
 """
 
-from palette import *
-from colors import *
-from keys import *
-from const import *
+from .palette import *
+from .colors import *
+from .keys import *
+from .const import *
