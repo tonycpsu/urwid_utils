@@ -6,8 +6,8 @@ from urwid.escape import input_sequences, _keyconv
 
 class KeySequence(str):
 
-    def __init__(self, value=''):
-        str.__init__(self, value)
+    def __new__(cls, data='', eggs=0):
+        return super(KeySequence, cls).__new__(cls, data)
 
 keys = [k for s,k in input_sequences] + list(_keyconv.values())
 
