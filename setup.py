@@ -2,13 +2,16 @@
 
 from setuptools import setup
 
-import urwid_utils
+# 2018-03-04 (tonyc) this breaks because it imports urwid, which the user may
+# or may not have installed yet.  For now, just maintain README separately.
+
+#import urwid_utils
 
 # README.rst dynamically generated:
-with open('README.rst', 'w') as f:
-    f.write(urwid_utils.__doc__)
+# with open('README.rst', 'w') as f:
+#     f.write(urwid_utils.__doc__)
 
-NAME = urwid_utils.__name__
+NAME = "urwid_utils" #urwid_utils.__name__
 
 def read(file):
     with open(file, 'r') as f:
@@ -18,13 +21,13 @@ setup(
     name=NAME,
     version=read('VERSION'),
     description='A collection of simple, straightforward, but extensible utilities for the urwid package.',
-    long_description=read('README.rst'),
+    # long_description=read('README.rst'),
     author='Mike Burr',
     author_email='mburr@unintuitive.org',
     url='https://github.com/stnbu/{0}'.format(NAME),
     download_url='https://github.com/stnbu/{0}/archive/master.zip'.format(NAME),
     provides=[NAME],
-    requires=['urwid'],
+    install_requires=['urwid'],
     license='MIT',
     bugtrack_url='https://github.com/stnbu/{0}/issues'.format(NAME),
     classifiers=[
