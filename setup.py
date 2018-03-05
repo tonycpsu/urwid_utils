@@ -19,7 +19,7 @@ def read(file):
 
 setup(
     name=NAME,
-    version=read('VERSION'),
+    version="0.1.0-dev",
     description='A collection of simple, straightforward, but extensible utilities for the urwid package.',
     # long_description=read('README.rst'),
     author='Tony Cebzanov',
