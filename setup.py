@@ -25,11 +25,11 @@ setup(
     author='Tony Cebzanov',
     author_email='tonycpsu@gmail.com',
     url='https://github.com/stnbu/{0}'.format(NAME),
-    download_url='https://github.com/stnbu/{0}/archive/master.zip'.format(NAME),
+    download_url='https://github.com/tonycpsu/{0}/archive/master.zip'.format(NAME),
     provides=[NAME],
     install_requires=['urwid'],
     license='MIT',
-    bugtrack_url='https://github.com/stnbu/{0}/issues'.format(NAME),
+    bugtrack_url='https://github.com/tonycpsu/{0}/issues'.format(NAME),
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console :: Curses',
