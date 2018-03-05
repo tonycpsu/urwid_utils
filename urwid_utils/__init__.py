@@ -22,7 +22,7 @@ urwid_utils.util
      Mostly internal-used utilities.
 """
 
-__version__ = "0.1.1-dev"
+__version__ = "0.1.2-dev"
 
 from .palette import *
 from .colors import *
